@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isPalindrome(string s) {
+        int left = 0, right = s.size()-1;
+        while (left<right){
+            char leftchar = tolower(s[left]);
+            char rightchar = tolower(s[right]);
+
+            if (!isalnum(leftchar)){
+                left++;
+                continue;
+            }
+            if (!isalnum(rightchar)){
+                right--;
+                continue;
+            }
+            if (leftchar != rightchar) return 0;
+            left++;
+            right--;
+        }
+        return 1;
+    }
+};
