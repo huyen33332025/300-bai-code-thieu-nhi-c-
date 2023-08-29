@@ -1,0 +1,19 @@
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        stack<TreeNode*> nodeStack;
+        if (root != NULL) nodeStack.push(root);
+        while (!nodeStack.empty()){
+            TreeNode* current = nodeStack.top();
+            nodeStack.pop();
+
+            TreeNode* tmp = current->left;
+            current->left = current->right;
+            current->right = tmp;
+            
+            if (current->left != NULL) nodeStack.push(current->left);
+            if (current->right != NULL) nodeStack.push(current->right);
+        }
+        return root;
+    }
+};
