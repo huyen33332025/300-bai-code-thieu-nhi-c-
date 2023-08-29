@@ -1,0 +1,31 @@
+class MyQueue {
+    stack<int> data,temp;
+    void shiftStack(){
+        if (data.empty()){
+            while (!temp.empty()){
+                data.push(temp.top());
+                temp.pop();
+            }
+        }
+    }
+public:
+    void push(int x) {
+        temp.push(x);
+    }
+    
+    int pop(void) {
+        shiftStack();
+        int val = data.top();
+        data.pop();
+        return val;
+    }
+    
+    int peek(void) {
+        shiftStack();
+        return data.top();
+    }
+    
+    bool empty(void) {
+        return data.empty() && temp.empty();
+    }
+};
