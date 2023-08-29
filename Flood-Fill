@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        const int h = image.size(), w = image[0].size(), startColor = image[sr][sc];
+        std::function<void(int, int)> dfs;
+
+        dfs = [&](int r, int c) -> void {
+            if ( r<0 || r>=h || c<0 || c>=w || image[r][c] == color || image[r][c] != startColor ) {
+                return;
+            }
+
+            image[r][c] = color;
+            
+            dfs(r-1,c);
+            dfs(r+1,c);
+            dfs(r,c-1);
+            dfs(r,c+1);
+        };
+        if (startColor != color) dfs(sr,sc);
+        return image;
+    }
+};
