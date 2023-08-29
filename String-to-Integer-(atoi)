@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int myAtoi(string s) {
+        if (s.size()==0) return 0;
+        int index = 0;
+        while (index < s.size() && s[index] == ' ') ++index;
+
+        bool check = 0;
+        if (index < s.size()){
+            if (s[index] == '-'){
+                check = 1;
+                ++index;
+            } else if (s[index] == '+') ++index;
+        }
+        int res = 0;
+
+        while (index < s.size() && isdigit(s[index])){
+            int digit = s[index] - '0';
+
+            if (res > (INT_MAX/10) || res == (INT_MAX/10) && digit > 7) return check? INT_MIN: INT_MAX;
+            res = (res*10)+digit;
+            ++index;
+        }
+        return check? -res: res;
+    }
+};
